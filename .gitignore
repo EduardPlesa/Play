@@ -1,0 +1,44 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+*.csproj
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/settings.json
+
+# User-specific and temporary files
+*.swp
+*.tmp
+*.log
+*.cache
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Environment and secrets
+.env
+appsettings.Development.json
+appsettings.Local.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Http Client
+*.http
+
+# Json Files 
+*.json
