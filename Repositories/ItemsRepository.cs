@@ -5,21 +5,20 @@ using Play.Catalog.Service.Entities;
 
 namespace Play.Catalog.Service.Repositories
 {
-    public class ItemsRepository
+
+    public class ItemsRepository : IItemsRepository
     {
         private const string collectionName = "Catalog";
         private readonly IMongoCollection<Item> dbCollection;
         private readonly FilterDefinitionBuilder<Item> filterBuilder = Builders<Item>.Filter;
 
-        public ItemsRepository()
+        public ItemsRepository(IMongoDatabase  database)
         {
             var settings = MongoClientSettings.FromConnectionString("mongodb://localhost:27017");
 
-           BsonSerializer.RegisterSerializer(new MongoDB.Bson.Serialization.Serializers.GuidSerializer(BsonType.String));
+            BsonSerializer.RegisterSerializer(new MongoDB.Bson.Serialization.Serializers.GuidSerializer(BsonType.String));
 
-            var mongoClient = new MongoClient(settings);
-            var mongoDatabase = mongoClient.GetDatabase("Catalog");
-            dbCollection = mongoDatabase.GetCollection<Item>(collectionName);
+            dbCollection = database.GetCollection<Item>(collectionName);
         }
 
         public async Task<IReadOnlyCollection<Item>> GetAllAsync()
