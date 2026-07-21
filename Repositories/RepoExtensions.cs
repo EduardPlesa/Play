@@ -23,13 +23,13 @@ namespace Play.Catalog.Service.Repositories
             return services;
         }
 
-        public static IServiceCollection AddMongoRepository(this IServiceCollection services, string collectionName) where T : IEntity
+        public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services, string collectionName) where T : IEntity
         {
-            services.AddSingleton<IRepository<Item>>(serviceProvider =>
+            services.AddSingleton<IRepository<T>>(serviceProvider =>
             {
 
                 var database = serviceProvider.GetService<IMongoDatabase>();
-                return new MongoRepository<Item>(database);
+                return new MongoRepository<T>(database, collectionName);
             });
             {
                 return services;

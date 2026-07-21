@@ -9,9 +9,9 @@ namespace Play.Catalog.Service.Controllers
     [Route("items")]
     public class ItemsController : ControllerBase
     {
-        private readonly IItemsRepository itemsRepository;
-        
-        public ItemsController(IItemsRepository itemsRepository)
+        private readonly IRepository<Item> itemsRepository;
+
+        public ItemsController(IRepository<Item> itemsRepository)
         {
             this.itemsRepository = itemsRepository;
         }
@@ -43,9 +43,9 @@ namespace Play.Catalog.Service.Controllers
                 Name = createItemDto.Name,
                 Description = createItemDto.Description,
                 Price = createItemDto.Price,
-                CreatedDate = DateTimeOffset.UtcNow        
+                CreatedDate = DateTimeOffset.UtcNow
             };
-            await itemsRepository.CreateAsync(item);    
+            await itemsRepository.CreateAsync(item);
             return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item.AsDto());
         }
 
