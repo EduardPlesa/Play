@@ -6,13 +6,12 @@ using Play.Catalog.Service.Entities;
 namespace Play.Catalog.Service.Repositories
 {
 
-    public class ItemsRepository : IItemsRepository
+    public class MongoRepository : IRepository<Item> where T : IEntity
     {
-        private const string collectionName = "Catalog";
         private readonly IMongoCollection<Item> dbCollection;
         private readonly FilterDefinitionBuilder<Item> filterBuilder = Builders<Item>.Filter;
 
-        public ItemsRepository(IMongoDatabase  database)
+        public MongoRepository(IMongoDatabase  database)
         {
             var settings = MongoClientSettings.FromConnectionString("mongodb://localhost:27017");
 
