@@ -1,5 +1,6 @@
 using MongoDB.Driver;
 using Play.Catalog.Service;
+using Play.Catalog.Service.Entities;
 using Play.Catalog.Service.Repositories;
 using Play.Catalog.Service.Settings;
 
@@ -13,9 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddDatabase(builder.Configuration);
-
-builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
+builder.Services.AddMongo(builder.Configuration);
+builder.Services.AddMongoRepository<Item>("items");
 
 var app = builder.Build();
 

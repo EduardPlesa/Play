@@ -11,9 +11,9 @@ namespace Play.Catalog.Service.Repositories
         private readonly IMongoCollection<T> dbCollection;
         private readonly FilterDefinitionBuilder<T> filterBuilder = Builders<T>.Filter;
 
-        public MongoRepository(IMongoDatabase  database)
+        public MongoRepository(IMongoDatabase database, string collectionName)
         {
-            dbCollection = database.GetCollection<T>(typeof(T).Name.ToLower());
+            dbCollection = database.GetCollection<T>(collectionName);
         }
 
         public async Task<IReadOnlyCollection<T>> GetAllAsync()
